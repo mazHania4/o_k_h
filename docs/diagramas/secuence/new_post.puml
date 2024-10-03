@@ -1,0 +1,14 @@
+@startuml new_post
+actor Publicador
+Publicador -> Sistema : Crear publicación
+Sistema -> BaseDeDatos : Verificar si tiene 2 publicaciones aprobadas
+alt Publicador tiene 2 o más publicaciones aprobadas
+    Sistema -> BaseDeDatos : Guardar publicación automáticamente
+    Sistema -> Publicador : Notificar que se publicó automáticamente
+else Menos de 2 publicaciones aprobadas
+    Sistema -> Administrador : Notificar para revisión
+    Administrador -> Sistema : Aprobar o rechazar publicación
+    Sistema -> BaseDeDatos : Actualizar estado de publicación
+    Sistema -> Publicador : Notificar resultado de la revisión
+end
+@enduml

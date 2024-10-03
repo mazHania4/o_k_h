@@ -1,0 +1,153 @@
+@startchen peter_chen
+
+
+entity "Users" as users {
+    user_id     
+    name 
+    username 
+    password 
+    type 
+    state
+}
+
+entity "Publishers" as publishers {
+    user_id 
+    approved_posts
+    state
+}
+
+entity "Posts" as posts {
+    post_id 
+    publisher_id
+    title 
+    start_dttm 
+    end_dttm 
+    capacity 
+    location 
+    description 
+    url 
+}
+
+entity "Categories" as cats {
+    category_id
+    name
+    description
+}
+
+relationship "Post_Cat" as post_cat {
+    category_id
+    post_id 
+}
+
+entity "Audience_type" as audience_type {
+    audience_type_id
+    name
+    description 
+}
+
+relationship "Post_audience" as post_audience {
+    audience_type_id
+    post_id
+}
+
+entity "Attendances" as attendances {
+    user_id 
+    post_id
+}
+
+entity "ReportType" as report_types {
+    report_types_id
+    name 
+    description 
+}
+
+entity "Reports" as reports {
+    user_id 
+    post_id
+    report_type
+    comment
+}
+
+
+entity "NotifType" as notifTypes {
+    notif_types_id 
+    name 
+    description 
+}
+
+entity "Notifications" as notifs {
+    notification_id 
+    user_id 
+     post_id 
+    title 
+    type 
+    description 
+}
+
+
+relationship "are" as publ_usr { 
+}
+publ_usr -- users
+publ_usr -- publishers
+
+relationship "make" as post_publ {
+}
+post_publ -- posts
+post_publ -- publishers
+
+relationship "has" as post_cat {
+}
+post_cat -- posts
+post_cat -- cats
+
+relationship "has" as pa_post {
+}
+pa_post -- post_audience
+pa_post -- posts
+
+relationship "has" as pa_at {
+}
+pa_at -- post_audience
+pa_at -- audience_type
+
+relationship "register" as usr_att {
+}
+usr_att -- users
+usr_att -- attendances
+
+relationship "receives" as post_att {
+}
+post_att -- posts
+post_att -- attendances
+
+relationship "is about" as post_rep {
+}
+post_rep -- posts
+post_rep -- reports
+
+relationship "makes" as usr_rep {
+}
+usr_rep -- users
+usr_rep -- reports
+
+relationship "has" as rep_rept {
+}
+rep_rept -- reports
+rep_rept -- report_types
+
+relationship "receives" as usr_not {
+}
+usr_not -- users
+usr_not -- notifs
+
+relationship "is about" as post_not {
+}
+post_not -- notifs
+post_not -- posts
+
+relationship "has" as not_nott {
+}
+not_nott -- notifs
+not_nott -- notifTypes
+
+@endchen

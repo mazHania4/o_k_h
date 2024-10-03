@@ -1,0 +1,122 @@
+@startuml entity_relation
+
+' hide the spot
+' hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+
+entity "Users" as users {
+    [PK] user_id : INTEGER NOT NULL
+    --
+    name : VARCHAR
+    username : VARCHAR
+    password : VARCHAR
+    type : userType
+    state: userState
+}
+
+entity "Publishers" as publishers {
+    [PK][FK] user_id : INTEGER NOT NULL
+    --
+    approved_posts : INTEGER
+    state: publisherState
+}
+
+entity "Posts" as posts {
+    [PK] post_id : INTEGER NOT NULL
+    [FK] publisher_id : INTEGER NOT NULL
+    --
+    title : VARCHAR
+    start_dttm : DATETIME
+    end_dttm : DATETIME
+    capacity : INTEGER
+    location : VARCHAR
+    description : VARCHAR
+    url : VARCHAR
+}
+
+entity "Categories" as cats {
+    [PK] category_id : INTEGER NOT NULL
+    --
+    name : VARCHAR
+    description : VARCHAR
+}
+
+entity "Post_Cat" as post_cat {
+    [PK][FK] category_id : INTEGER NOT NULL
+    [PK][FK] post_id : INTEGER NOT NULL
+}
+
+entity "Audience_type" as audience_type {
+    [PK] audience_type_id : INTEGER NOT NULL
+    --
+    name : VARCHAR
+    description : VARCHAR
+}
+
+entity "Post_audience" as post_audience {
+    [PK][FK] audience_type_id : INTEGER NOT NULL
+    [PK][FK] post_id : INTEGER NOT NULL
+}
+
+entity "Attendances" as attendances {
+    [PK][FK] user_id : INTEGER NOT NULL
+    [PK][FK] post_id : INTEGER NOT NULL
+}
+
+entity "ReportType" as report_types {
+    [PK] report_types_id : INTEGER NOT NULL
+    --
+    name : VARCHAR
+    description : VARCHAR
+}
+
+entity "Reports" as reports {
+    [PK][FK] user_id : INTEGER NOT NULL
+    [PK][FK] post_id : INTEGER NOT NULL
+    --
+    report_type : reportType
+    comment: VARCHAR
+}
+
+
+entity "NotifType" as notifTypes {
+    [PK] notif_types_id : INTEGER NOT NULL
+    --
+    name : VARCHAR
+    description : VARCHAR
+}
+
+entity "Notifications" as notifs {
+    [PK] notification_id : INTEGER NOT NULL
+    [FK] user_id : INTEGER NOT NULL
+    [FK] post_id : INTEGER NOT NULL
+    --
+    title : VARCHAR
+    type : notifType
+    description : VARCHAR
+}
+
+publishers ||..|| users
+posts }|..|| publishers
+post_cat }|..|| posts
+post_cat }|..|| cats
+post_audience }|..|| posts
+post_audience }|..|| audience_type
+attendances }|..|| posts
+attendances }|..|| users
+reports }|..|| posts
+reports }|..|| users
+reports }|..|| report_types
+
+notifs }|..|| users
+notifs }|..|| posts
+notifs }|..|| notifTypes
+
+
+
+
+
+@enduml

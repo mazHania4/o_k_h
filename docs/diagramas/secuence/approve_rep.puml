@@ -1,0 +1,12 @@
+@startuml approve_rep
+actor Administrador
+Administrador -> Sistema : Revisar reportes de publicador
+Sistema -> BaseDeDatos : Consultar reportes
+alt Reportes confirmados
+    Administrador -> Sistema : Banear publicador
+    Sistema -> BaseDeDatos : Actualizar estado del publicador
+    Sistema -> Publicador : Notificar baneo
+else Reportes no confirmados
+    Sistema -> Publicador : Notificar reporte no confirmado
+end
+@enduml

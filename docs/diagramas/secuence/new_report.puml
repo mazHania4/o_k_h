@@ -1,0 +1,16 @@
+@startuml new_report
+actor UsuarioRegistrado
+UsuarioRegistrado -> Sistema : Reportar publicación
+Sistema -> BaseDeDatos : Guardar reporte
+Sistema -> Publicador : Notificar reporte
+alt Número de reportes >= 3
+    Sistema -> Administrador : Notificar administrador
+    Administrador -> Sistema : Aprobar o ignorar reporte
+    alt Reporte aprobado
+        Sistema -> BaseDeDatos : Ocultar publicación
+        Sistema -> Publicador : Notificar sanción
+    else Reporte ignorado
+        Sistema -> Publicador : Notificar reporte ignorado
+    end
+end
+@enduml

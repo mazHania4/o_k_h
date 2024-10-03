@@ -1,0 +1,10 @@
+@startuml login
+actor Usuario
+Usuario -> Sistema : Ingresar credenciales
+Sistema -> BaseDeDatos : Validar credenciales
+alt Credenciales válidas
+    Sistema -> Usuario : Redirigir a la página de inicio
+else Credenciales inválidas
+    Sistema -> Usuario : Mostrar error de autenticación
+end
+@enduml

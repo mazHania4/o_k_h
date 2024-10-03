@@ -1,0 +1,36 @@
+@startuml deployment
+
+node "<<DBMS>> \n MariaDB" as dbms {
+    component autentication
+    database database
+}
+
+actor user
+
+node "<<Web Server>> \n Apache" as server {
+    node "<<Web App>> \nPHP" as webapp {
+        component "user interface" as gui
+        component "controllers \n(bussiness logic)" as ctrl
+        component "database connector" as db_con
+    }
+    component "Log file" as log
+}
+
+node "<<Client>> \n Device" as device{
+    component "Web browser" as browser {
+        artifact "HTML5" as html
+        artifact "CSS" as css
+        artifact "JavaScript" as js
+    }
+}
+
+user -l- device
+browser -l- server : "  http protocol"
+db_con -u- database
+user~u~gui
+gui<-l->ctrl
+ctrl<-l->db_con
+
+
+
+@enduml

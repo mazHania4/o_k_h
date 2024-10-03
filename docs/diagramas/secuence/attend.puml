@@ -1,0 +1,6 @@
+@startuml attend
+actor UsuarioRegistrado
+UsuarioRegistrado -> Sistema : Marcar "Deseo asistir" a un evento
+Sistema -> BaseDeDatos : Guardar evento en lista de deseos
+Sistema -> UsuarioRegistrado : Mostrar notificación con cuenta regresiva
+@enduml

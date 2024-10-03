@@ -1,0 +1,52 @@
+Descripción
+
+Un cliente desea contar con un sistema que le permita actualizar eventos a desarrollarse en Xela "ola ke hace"; en una reunión se definió que podía tener las siguientes Funcionalidades el sistema
+
+    Administración de usuarios (admin, publicador de anuncios, usuario registrado)
+    Login
+    Notificaciones (administrador y usuarios)
+    Crear publicación (lugar, fecha, hora, cupo limitado, URL, tipo de público)
+    Acceso a usuarios visitantes
+
+Objetivo
+
+Desarrollar el pensamiento sistémico y ponerlo en práctica en un sistema de información.
+
+Reglas de negocio:
+    Un publicador de anuncios debe tener al menos dos publicaciones aprobadas para que se publiquen automáticamente sus anuncios. De lo contrario un administrador será el responsable de autorizar la publicación.
+    Un usuario registrado tiene la opción de "deseo asistir" y está le mostrará una notificación en la que le liste esos eventos con un conteo regresivo.
+    Los usuarios registrados pueden reportar un anuncio, deberán indicar el motivo (facilite esa opción)
+    Las publicaciones con 3 reportes deberán de quitarse de la vista general
+    Las publicaciones con reportes deberá de aprobarlas o ignorarlas un administrador.
+    Los anunciantes que han sido reportados y el reporte fue confirmado por un admin, perderán el privilegio de publicación automática, si ya lo había adquirido, de no tenerlo (primeras publicaciones), será baneado del sistema para publicar
+
+Ambiente de trabajo
+
+    El proyecto es en individual.
+    Las tecnologías a usar son las de XAMPP (PHP, Javascript, HTML, CSS, MySQL/MariaDB). Se recomienda que sean libres y que puedan ser desplegadas en los servidores del Cunoc. Puede usar frameworks.
+    Deberá de tener clases/métodos de prueba en las distintas capas.
+    Tome las consideraciones necesarias para su solución.
+
+Puntos de evaluación
+    Funcionalidades.
+        (Abstracción de la solución, calidad del producto, escalabilidad/integridad del sistema)
+
+Enlaces de interés
+
+    Pensamiento sistémico, https://srlabs.a2hosted.com/rs-humhub/index.php?r=wiki%2Fpage%2Fview&title=Pensamiento+sist%C3%A9mico&cguid=a9423a44-8ee7-4719-9034-48f8bf104ccd
+    Abstracción de información, https://srlabs.a2hosted.com/rs-humhub/index.php?r=wiki%2Fpage%2Fview&title=1.+Abstracci%C3%B3n+de+informaci%C3%B3n+-Ejemplos-&cguid=a9423a44-8ee7-4719-9034-48f8bf104ccd
+
+
+Fechas importantes
+20241031 - Entrega y presentación del proyecto
+
+
+
+
+*** Consideraciones especiales:
+-Debe ser escalable
+-agregar categorización de eventos
+-agregar y facilitar busqueda de eventos
+-Importante estar abierto para publico general como usuario visitantes
+-sistema ya alimentado para la calificación y preparar las pruebas a usar
+

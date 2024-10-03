@@ -1,0 +1,37 @@
+Módulos y sus funciones:
+
+    Admin:
+        -revisar/aprovar publicación
+        -revisar reporte -> bannear publicador
+        -*home
+            -ver publicaciones
+            -ver notificaciones
+
+
+
+    Publicador:
+        -crear publicación
+        -*home
+            -ver publicaciones
+                -"deseo asistir"
+                -reportar
+            -ver notificaciones
+
+
+    Usuario:
+        -volverse publicador
+        -*home
+            -ver publicaciones
+                -"deseo asistir"
+                -reportar
+            -ver notificaciones
+
+
+
+    Visitante:
+        -crear cuenta
+        -iniciar sesión
+        -*home
+            -ver publicaciones
+
+

@@ -1,0 +1,77 @@
+@startuml packages
+
+package ctrl {
+    artifact "log_in" as login_ctrl
+    artifact "sing_in" as singin_ctrl
+
+    artifact "notifications" as not_ctrl
+    artifact "posts" as publ_ctrl
+
+    package "admin" as adm_ctrl {
+        artifact "new_post" as adm_new_ctrl
+        artifact "report" as adm_rep_ctrl
+    }
+
+    package "publisher" as publisher_ctrl {
+        artifact "new_post" as publisher_new_ctrl
+    }
+
+    package "user" as usr_ctrl {
+        artifact "attend" as usr_attend_ctrl
+        artifact "report" as usr_rep_ctrl
+        artifact "become_publisher" as usr_to_publisher_ctrl
+    }
+
+}
+
+package view {
+    package "admin" as adm_view {
+        artifact "aprove new" as adm_new_view
+        artifact "aprove report" as adm_rep_view
+    }
+
+    package "visitant" as vs_view {
+        artifact "home" as v_home
+        artifact "log_in" as login_view
+        artifact "sing_in" as singin_view
+    }
+
+    package "user" as usr_view {
+        artifact "home" as u_home
+        artifact "notifications" as u_not
+    }
+
+    package "publisher" as publisher_view {
+        artifact "home" as p_home
+        artifact "new post" as publisher_new_view
+        artifact "notifications" as p_not
+    }
+
+    package "commons" as cm_view {
+        artifact "posts"
+    }
+}
+
+package model {
+    artifact "user" as user
+    artifact "post" as post
+    artifact "notification" as notif
+    artifact "report" as report
+}
+
+actor user as stick
+
+view--u[hidden]--ctrl
+stick----view
+ctrl--[hidden]--model
+
+adm_new_view -u- adm_new_ctrl
+adm_rep_view -u- adm_rep_ctrl
+
+login_view -u- login_ctrl
+singin_view -u- singin_ctrl
+
+publisher_new_view -u- publisher_new_ctrl
+
+
+@enduml
