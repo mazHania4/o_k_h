@@ -12,6 +12,7 @@ entity "Users" as users {
     --
     name : VARCHAR
     username : VARCHAR
+    email :VARCHAR
     password : VARCHAR
     type : userType
     state: userState
@@ -29,9 +30,13 @@ entity "Posts" as posts {
     [FK] publisher_id : INTEGER NOT NULL
     --
     title : VARCHAR
-    start_dttm : DATETIME
-    end_dttm : DATETIME
+    start_date : DATE
+    start_time : TIME
+    end_date : DATE
+    end_time : TIME
     capacity : INTEGER
+    attendances : INTEGER
+    reports : INTEGER
     location : VARCHAR
     description : VARCHAR
     url : VARCHAR
