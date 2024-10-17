@@ -17,6 +17,7 @@ class Post
     private $location;
     private $description;
     private $url;
+    private $state;
 
     public function __construct() {   }
 
@@ -90,6 +91,11 @@ class Post
         return $this->url;
     }
 
+    public function getState()
+    {
+        return $this->state;
+    }
+
     public function setPostId($post_id): void
     {
         $this->post_id = $post_id;
@@ -158,5 +164,10 @@ class Post
     public function setUrl($url): void
     {
         $this->url = $url;
+    }
+
+    public function setState($state): void
+    {
+        $this->state = $state;
     }
 }

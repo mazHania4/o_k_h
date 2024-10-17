@@ -33,6 +33,7 @@ CREATE TABLE posts (
     location VARCHAR(350),
     description VARCHAR(750),
     url VARCHAR(255),
+    state ENUM('active', 'banned') DEFAULT 'active',
     CONSTRAINT fk_post_to_publisher FOREIGN KEY (publisher_id) REFERENCES publishers(user_id)  
 );
 
@@ -91,7 +92,7 @@ CREATE TABLE reports (
 
 CREATE TABLE notif_types (
     notif_types_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255) UNIQUE,
     description VARCHAR(350)
 );
 
@@ -102,6 +103,8 @@ CREATE TABLE notifications (
     title VARCHAR(255),
     type INT NOT NULL,
     description VARCHAR(500),
+    date DATETIME DEFAULT NOW(),
+    state ENUM('active', 'dismissed') DEFAULT 'active',
     CONSTRAINT fk_notif_to_user FOREIGN KEY (user_id) REFERENCES users(user_id)  ,
     CONSTRAINT fk_notif_to_posts FOREIGN KEY (post_id) REFERENCES posts(post_id)  ,
     CONSTRAINT fk_notif_to_notifType FOREIGN KEY (type) REFERENCES notif_types(notif_types_id)  

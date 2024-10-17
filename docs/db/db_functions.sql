@@ -2,6 +2,7 @@
 CREATE OR REPLACE VIEW getPosts AS 
     SELECT p.*, u.name publisher_name FROM posts p 
     JOIN users u on p.publisher_id = u.user_id
+    WHERE p.state = 'active'
     ORDER BY p.post_id DESC LIMIT 15;
 
 
@@ -13,6 +14,9 @@ BEGIN
     UPDATE posts
     SET attendances = attendances + 1
     WHERE post_id = NEW.post_id;
+
+    INSERT INTO notifications (user_id, post_id, title, type, description)
+    VALUES (NEW.user_id, NEW.post_id, 'Asistencia registrada', 4, 'Se ha registrado su asistencia a un evento');
 END$$
 DELIMITER ;
 
@@ -38,3 +42,24 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+DELIMITER $$
+CREATE TRIGGER after_report_insert
+AFTER INSERT ON reports
+FOR EACH ROW
+BEGIN
+    UPDATE posts
+    SET reports = reports + 1
+    WHERE post_id = NEW.post_id;
+
+    IF (SELECT reports FROM posts WHERE post_id = NEW.post_id) >= 3 THEN
+        UPDATE posts
+        SET state = 'banned'
+        WHERE post_id = NEW.post_id;
+    END IF;
+
+    INSERT INTO notifications (user_id, post_id, title, type, description)
+    SELECT user_id, NEW.post_id, 'Nuevo Reporte', 2, 'Se ha reportado una publicación'
+    FROM users WHERE type = 'admin';
+END$$
+DELIMITER ;

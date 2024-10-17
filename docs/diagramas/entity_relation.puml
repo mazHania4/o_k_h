@@ -15,14 +15,14 @@ entity "Users" as users {
     email :VARCHAR
     password : VARCHAR
     type : userType
-    state: userState
+    state: ENUM
 }
 
 entity "Publishers" as publishers {
     [PK][FK] user_id : INTEGER NOT NULL
     --
     approved_posts : INTEGER
-    state: publisherState
+    state: ENUM
 }
 
 entity "Posts" as posts {
@@ -40,6 +40,7 @@ entity "Posts" as posts {
     location : VARCHAR
     description : VARCHAR
     url : VARCHAR
+    state: ENUM
 }
 
 entity "Categories" as cats {
@@ -101,6 +102,8 @@ entity "Notifications" as notifs {
     --
     title : VARCHAR
     type : notifType
+    date : DATETIME
+    state: ENUM
     description : VARCHAR
 }
 

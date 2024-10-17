@@ -23,7 +23,7 @@ class Posts_svc{
         $stmt = $this->pdo->prepare("SELECT p.*, u.name AS publisher_name FROM posts p
                 JOIN users u ON p.publisher_id = u.user_id WHERE p.post_id NOT IN 
                     ( SELECT a.post_id FROM attendances a WHERE a.user_id = :u_id )
-                ORDER BY p.post_id DESC LIMIT 15");
+                AND p.state = 'active' ORDER BY p.post_id DESC LIMIT 15");
         $stmt->bindParam(':u_id', $user_id, PDO::PARAM_STR);
         $stmt->execute();
         $posts = $stmt->fetchAll(PDO::FETCH_CLASS, "Post");     

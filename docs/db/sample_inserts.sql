@@ -115,6 +115,14 @@ INSERT INTO post_cat(post_id, category_id) VALUES
 (24, 4), (25, 1), (25, 2), (26, 4), (27, 9), (27, 15), (28, 4), (29,12);
 
 
+INSERT INTO notif_types (name, description) VALUES
+('Validar_post_admin', 'Se le notifica a un administrador que se ha realizado una publicación y necesita ser aprobada'),
+('Reporte_admin', 'Se le notifica a un administrador que una publicación ha sido reportada'),
+('Reporte_publicador', 'Se le notifica a un publicador que una de sus publicaciones ha sido reportada'),
+('Asistencia', 'Se le notifica a un usuario que se ha registrado su asistencia sobre una publicacion');
+
+
+
 INSERT INTO report_types (name, description) VALUES
 ('Contenido Inapropiado', 'Reports regarding content that is offensive, inappropriate, or violates community guidelines.'),
 ('Error técnico', 'Reports related to technical problems or errors with the event platform or services.'),
