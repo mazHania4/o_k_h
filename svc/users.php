@@ -27,13 +27,33 @@ class Users_svc{
     }
 
     public function validateLogin($username, $password){
-        $hash = hash('sha256', $password); 
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password AND state = 'active'");
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $hash, PDO::PARAM_STR);
-        $stmt->execute();
-        $user = $stmt->fetchObject("User");
-        return $user;
+        try{
+            $hash = hash('sha256', $password); 
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password AND state = 'active'");
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $hash, PDO::PARAM_STR);
+            $stmt->execute();
+            $user = $stmt->fetchObject("User");
+            return $user;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    public function createUser($name, $username, $email, $password){
+        try {
+            $hash = hash('sha256', $password); 
+            $stmt = $this->pdo->prepare("INSERT INTO users (name, username, email, password) VALUES (:n, :u, :e, :p)");
+            $stmt->bindParam(':n', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':u', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':e', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':p', $hash, PDO::PARAM_STR);
+            $stmt->execute();
+            $user = $this->validateLogin($username, $password);
+            return $user;
+        } catch (PDOException $e) {
+            return null;
+        }
     }
 
 }

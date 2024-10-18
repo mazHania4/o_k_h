@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data.success) {
                     // Actualizar el contador de asistencias
                     var countElement = document.getElementById('attendance-count-' + postId);
-                    countElement.textContent = data.new_count.attendances;
+                    countElement.textContent = data.new_count;
                     
                     // Cambiar el texto del botón
                     buttonElement.textContent = 'Asistencia Registrada';

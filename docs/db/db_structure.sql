@@ -8,8 +8,8 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    type ENUM('admin', 'publisher', 'user') NOT NULL,
-    state ENUM('active', 'inactive') NOT NULL
+    type ENUM('admin', 'publisher', 'user') NOT NULL DEFAULT 'user',,
+    state ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
 );
 
 CREATE TABLE publishers (

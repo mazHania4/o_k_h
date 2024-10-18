@@ -2,13 +2,16 @@
 actor UsuarioRegistrado
 UsuarioRegistrado -> Sistema : Reportar publicación
 Sistema -> BaseDeDatos : Guardar reporte
-Sistema -> Publicador : Notificar reporte
-alt Número de reportes >= 3
+alt 
     Sistema -> Administrador : Notificar administrador
     Administrador -> Sistema : Aprobar o ignorar reporte
-    alt Reporte aprobado
+    alt Número de reportes >= 3
         Sistema -> BaseDeDatos : Ocultar publicación
-        Sistema -> Publicador : Notificar sanción
+        alt Publicaciones automaticas activas
+            Sistema -> Publicador : Limita publicación automatica
+        else Publicaciones automaticas desactivadas
+            Sistema -> Publicador : Es banneado
+        end
     else Reporte ignorado
         Sistema -> Publicador : Notificar reporte ignorado
     end

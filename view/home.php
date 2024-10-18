@@ -21,7 +21,7 @@
                                 <i class="fa-regular fa-font-awesome"></i>
                             </button>
                         <?php else: ?>
-                                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                <button id="openLogin" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal">
                                     <i class="fa-regular fa-font-awesome"></i>
                                 </button>
                         <?php endif; ?>
@@ -81,7 +81,7 @@
                     <?php if (isset($_SESSION['username'])): ?>
                         <button class="register-attendance btn btn-success" data-post-id="<?php echo htmlspecialchars($post->getPostId()); ?>">Registrar Asistencia</button>
                     <?php else: ?>
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">Registrar Asistencia</button>
+                        <button class="btn btn-success" id="openLogin" data-bs-toggle="modal" data-bs-target="#loginModal">Registrar Asistencia</button>
                     <?php endif; ?>
                 </div>
             </div>

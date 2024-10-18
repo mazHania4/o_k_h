@@ -22,7 +22,13 @@ package ctrl {
         artifact "report" as usr_rep_ctrl
         artifact "become_publisher" as usr_to_publisher_ctrl
     }
+}
 
+package svc {
+    artifact "db" as db
+    artifact "posts" as posts_svc
+    artifact "users" as users_svc
+    artifact "reports" as reports_svc
 }
 
 package view {
@@ -61,6 +67,7 @@ actor user as stick
 
 view--u[hidden]--ctrl
 stick----view
+ctrl--[hidden]--svc
 ctrl--[hidden]--model
 
 adm_new_view -u- adm_new_ctrl
