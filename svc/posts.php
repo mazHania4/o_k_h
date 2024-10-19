@@ -45,8 +45,7 @@ class Posts_svc{
     }
 
     function insertPost($post) {
-        $stmt = $this->pdo->prepare("
-        INSERT INTO posts (publisher_id, title, start_date, start_time, end_date, end_time, capacity, location, description, url) VALUES (:p, :t, :sd, :st, :ed, :et, :c, :l, :d, :u)");
+        $stmt = $this->pdo->prepare("INSERT INTO posts (publisher_id, title, start_date, start_time, end_date, end_time, capacity, location, description, url) VALUES (:p, :t, :sd, :st, :ed, :et, :c, :l, :d, :u)");
         $stmt->bindParam(':p', $post->getPublisherId(), PDO::PARAM_INT);
         $stmt->bindParam(':t', $post->getTitle(), PDO::PARAM_STR);
         $stmt->bindParam(':sd', $post->getStart_date(), PDO::PARAM_STR);
@@ -59,6 +58,45 @@ class Posts_svc{
         $stmt->bindParam(':u', $post->getUrl(), PDO::PARAM_STR);
         $stmt->execute();
         return true;        
+    }
+
+    public function searchPosts($searchTerm, $startDate, $endDate) {
+        $query = "SELECT p.*, u.name AS publisher_name
+                  FROM posts p 
+                  JOIN users u ON p.publisher_id = u.user_id 
+                  WHERE p.state = 'active'";
+
+        if (!empty($searchTerm)) {
+            $query .= " AND (p.title LIKE :searchTerm1
+                        OR p.description LIKE :searchTerm2 
+                        OR u.username LIKE :searchTerm3)";
+        }
+        if (!empty($startDate)) {
+            $query .= " AND p.start_date >= :startDate";
+        }
+        if (!empty($endDate)) {
+            $query .= " AND p.start_date <= :endDate";
+        }
+
+        $query .= " ORDER BY p.post_id DESC LIMIT 15";
+
+        $stmt = $this->pdo->prepare($query);
+
+        if (!empty($searchTerm)) {
+            $searchTermWildcard = '%' . $searchTerm . '%';
+            $stmt->bindParam(':searchTerm1', $searchTermWildcard, PDO::PARAM_STR);
+            $stmt->bindParam(':searchTerm2', $searchTermWildcard, PDO::PARAM_STR);
+            $stmt->bindParam(':searchTerm3', $searchTermWildcard, PDO::PARAM_STR);
+        }
+        if (!empty($startDate)) {
+            $stmt->bindParam(':startDate', $startDate, PDO::PARAM_STR);
+        }
+        if (!empty($endDate)) {
+            $stmt->bindParam(':endDate', $endDate, PDO::PARAM_STR);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_CLASS, "Post"); 
     }
     
 }

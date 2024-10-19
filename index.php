@@ -44,7 +44,7 @@ include 'model/user.php';
                         </a>
                     </li>
                     <li class="py-3">
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="/o_k_h/search" class="nav-link px-0 align-middle">
                             <i class="fa-solid fa-magnifying-glass pe-3"></i> <span class="ms-1 d-none d-sm-inline">Buscar</span>
                         </a>
                     </li>
