@@ -56,6 +56,13 @@ class Users_svc{
         }
     }
 
+    function becomePublisher($userid) {
+        $stmt = $this->pdo->prepare("INSERT INTO publishers (user_id) VALUES (:u_id)");
+        $stmt->bindParam(':u_id', $userid, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }
+
 }
 
 ?>

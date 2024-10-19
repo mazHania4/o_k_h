@@ -44,6 +44,23 @@ class Posts_svc{
         return $cats;
     }
 
+    function insertPost($post) {
+        $stmt = $this->pdo->prepare("
+        INSERT INTO posts (publisher_id, title, start_date, start_time, end_date, end_time, capacity, location, description, url) VALUES (:p, :t, :sd, :st, :ed, :et, :c, :l, :d, :u)");
+        $stmt->bindParam(':p', $post->getPublisherId(), PDO::PARAM_INT);
+        $stmt->bindParam(':t', $post->getTitle(), PDO::PARAM_STR);
+        $stmt->bindParam(':sd', $post->getStart_date(), PDO::PARAM_STR);
+        $stmt->bindParam(':st', $post->getStart_time(), PDO::PARAM_STR);
+        $stmt->bindParam(':ed', $post->getEnd_date(), PDO::PARAM_STR);
+        $stmt->bindParam(':et', $post->getEnd_time(), PDO::PARAM_STR);
+        $stmt->bindParam(':c', $post->getCapacity(), PDO::PARAM_INT);
+        $stmt->bindParam(':l', $post->getLocation(), PDO::PARAM_STR);
+        $stmt->bindParam(':d', $post->getDescription(), PDO::PARAM_STR);
+        $stmt->bindParam(':u', $post->getUrl(), PDO::PARAM_STR);
+        $stmt->execute();
+        return true;        
+    }
+    
 }
 
 ?>

@@ -52,3 +52,11 @@ body {
 .event-meta i {
     margin-right: 5px;
 }
+
+.btn-icon-split {
+	padding: 0;
+	overflow: hidden;
+	display: inline-flex;
+	align-items: stretch;
+	justify-content: center;
+}
