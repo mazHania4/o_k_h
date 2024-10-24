@@ -8,14 +8,14 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    type ENUM('admin', 'publisher', 'user') NOT NULL DEFAULT 'user',,
-    state ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+    type ENUM('admin', 'publisher', 'user') NOT NULL DEFAULT 'user',
+    state ENUM('active', 'inactive') NOT NULL DEFAULT 'active'
 );
 
 CREATE TABLE publishers (
     user_id INT NOT NULL PRIMARY KEY,
     approved_posts INT DEFAULT 0,
-    state ENUM('active', 'banned') DEFAULT 'active',
+    state ENUM('active', 'on_test', 'banned') DEFAULT 'on_test',
     CONSTRAINT fk_publisher_to_user FOREIGN KEY(user_id) REFERENCES users(user_id)  
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE posts (
     location VARCHAR(350),
     description VARCHAR(750),
     url VARCHAR(255),
-    state ENUM('active', 'banned') DEFAULT 'active',
+    state ENUM('active', 'pending', 'banned') DEFAULT 'active',
     CONSTRAINT fk_post_to_publisher FOREIGN KEY (publisher_id) REFERENCES publishers(user_id)  
 );
 
@@ -101,11 +101,11 @@ CREATE TABLE notifications (
     user_id INT NOT NULL,
     post_id INT NOT NULL,
     title VARCHAR(255),
-    type INT NOT NULL,
+    type_id INT NOT NULL,
     description VARCHAR(500),
     date DATETIME DEFAULT NOW(),
     state ENUM('active', 'dismissed') DEFAULT 'active',
     CONSTRAINT fk_notif_to_user FOREIGN KEY (user_id) REFERENCES users(user_id)  ,
     CONSTRAINT fk_notif_to_posts FOREIGN KEY (post_id) REFERENCES posts(post_id)  ,
-    CONSTRAINT fk_notif_to_notifType FOREIGN KEY (type) REFERENCES notif_types(notif_types_id)  
+    CONSTRAINT fk_notif_to_notifType FOREIGN KEY (type_id) REFERENCES notif_types(notif_types_id)  
 );

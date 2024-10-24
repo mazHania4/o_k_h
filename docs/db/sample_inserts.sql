@@ -25,7 +25,7 @@ INSERT INTO users (name, username, email, password, state, type) VALUES
 ('Paige Jankovsky',     'pjankovskyn',      'pjankovskyn@skyrock.com',      'cea70552116071b4ea769c41150f7f76c0e7673bfd6dc62453d507e41af9b529', 'active',   'user'); -- pass: tomate
 
 
-INSERT INTO publishers (user_id) VALUES (3), (4), (5), (8), (12), (13), (17);
+INSERT INTO publishers (user_id, state) VALUES (3, 'active'), (4, 'active'), (5, 'active'), (8, 'active'), (12, 'active'), (13, 'active'), (17, 'active');
 
 
 INSERT INTO posts (publisher_id, title, start_date, start_time, end_date, end_time, capacity, location, description, url) VALUES

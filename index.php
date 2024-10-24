@@ -49,9 +49,15 @@ include 'model/user.php';
                         </a>
                     </li>
                     <li class="py-3">
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fa-regular fa-bell pe-3"></i> <span class="ms-1 d-none d-sm-inline">Notificaciones</span> 
-                        </a>
+                        <?php if (isset($_SESSION['username'])): ?>
+                            <a href="/o_k_h/notifications" class="nav-link px-0 align-middle">
+                                <i class="fa-regular fa-bell pe-3"></i> <span class="ms-1 d-none d-sm-inline">Notificaciones</span> 
+                            </a>
+                        <?php else: ?>
+                            <button class="nav-link px-0 align-middle" id="openLogin" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                <i class="fa-regular fa-bell pe-3"></i> <span class="ms-1 d-none d-sm-inline">Notificaciones</span> 
+                            </button>
+                        <?php endif; ?>
                     </li>
                 </ul>
                 <hr style="background-color:white;height:2px;width:240px;">
@@ -81,7 +87,7 @@ include 'model/user.php';
             <?php endif; ?>
             <?php 
                 $page = $_GET["pages"];
-                if ($page == "home" ||$page == ""){
+                if ($page == "home" || $page == ""){
                     include "view/home.php";
                 }
                 if ($page == "search"){
@@ -92,10 +98,6 @@ include 'model/user.php';
                 }
                 if ($page == "logout"){
                     include "ctrl/logout_ctrl.php";
-                }
-                if ($page == "admin"){
-                    //redirect instead of include?
-                    include "view/admin.php";
                 }
             ?>
         </div>

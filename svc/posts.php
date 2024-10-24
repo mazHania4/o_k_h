@@ -12,6 +12,26 @@ class Posts_svc{
         $this->pdo = $this->db->getPDO();
     }
 
+    public function approvePost($post_id){
+        $stmt = $this->pdo->prepare("UPDATE posts SET state = 'active' WHERE post_id = :p_id");
+        $stmt->bindParam(':p_id', $post_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    
+    public function disapprovePost($post_id){
+        $stmt = $this->pdo->prepare("UPDATE posts SET state = 'banned' WHERE post_id = :p_id");
+        $stmt->bindParam(':p_id', $post_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function getPost($post_id) {
+        $stmt = $this->pdo->prepare("SELECT p.*, u.name AS publisher_name FROM posts p JOIN users u ON p.publisher_id = u.user_id WHERE post_id=:p_id");
+        $stmt->bindParam(':p_id', $post_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $post = $stmt->fetchObject("Post");     
+        return $post;
+    }
+
     public function getPosts(){
         $stmt = $this->pdo->prepare("SELECT * FROM getPosts");
         $stmt->execute();

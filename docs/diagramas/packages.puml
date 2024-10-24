@@ -9,7 +9,7 @@ package ctrl {
     artifact "search" as publ_ctrl
 
     package "admin" as adm_ctrl {
-        artifact "new_post" as adm_new_ctrl
+        artifact "approve_post" as adm_new_ctrl
         artifact "report" as adm_rep_ctrl
     }
 
@@ -29,15 +29,18 @@ package svc {
     artifact "posts" as posts_svc
     artifact "users" as users_svc
     artifact "reports" as reports_svc
+    artifact "notifs" as notif_svc
 }
 
 package view {
 
     artifact "home" as v_home
+    artifact "notifications" as u_not
     
     package "admin" as adm_view {
-        artifact "aprove new" as adm_new_view
-        artifact "aprove report" as adm_rep_view
+        artifact "notifications" as a_not
+        artifact "approve new" as adm_new_view
+        artifact "approve report" as adm_rep_view
     }
 
     package "visitant" as vs_view {
@@ -45,13 +48,8 @@ package view {
         artifact "sing_in" as singin_view
     }
 
-    package "user" as usr_view {
-        artifact "notifications" as u_not
-    }
-
     package "publisher" as publisher_view {
         artifact "new post" as publisher_new_view
-        artifact "notifications" as p_not
     }
     
 }
@@ -60,7 +58,6 @@ package model {
     artifact "user" as user
     artifact "post" as post
     artifact "notification" as notif
-    artifact "report" as report
 }
 
 actor user as stick
