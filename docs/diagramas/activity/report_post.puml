@@ -1,0 +1,17 @@
+@startuml report
+|Usuario|
+:Inicia sesión;
+:Selecciona una publicación;
+:Envía reporte con motivo;
+
+|Controlador de Reportes|
+:Valida reporte;
+|Servicios|
+:Almacena reporte en la base de datos;
+:Incrementa contador de reportes de la publicación;
+if (Reportes >= 3) then (Sí)
+    :Actualiza estado de la publicación a 'banned';
+endif
+|Notificaciones|
+:Genera notificación para administradores;
+@enduml

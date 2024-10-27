@@ -51,5 +51,3 @@ class Notification {
 }
 
 ?>
-
-En la carpeta raíz está la capeta /scripts en la que voy a guardar los arciovos de configuración inicial, ahí coloqué el codigo javascript que escribiste en el archivo init_db.js, necesito que en la misma carpeta escribas un script en el que iré colocando todos los comandos para las configuraciones extras que se harán a los contenedores de docker después de levantarlos, el primer comando que necesito que agregues es el que usa el script init_db.js para inicializar la base de datos en el contenedor de mongo

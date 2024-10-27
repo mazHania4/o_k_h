@@ -1,0 +1,24 @@
+@startuml admin_notifications
+participant Administrador
+participant Sistema
+participant Base_de_Datos
+
+Administrador -> Sistema: Solicitar notificaciones
+activate Sistema
+Sistema -> Base_de_Datos: Obtener notificaciones pendientes
+Base_de_Datos --> Sistema: Lista de notificaciones
+Sistema -> Administrador: Mostrar notificaciones
+loop Para cada notificación
+  Sistema -> Administrador: Mostrar detalles de la notificación
+  alt Notificación es de publicación
+    Administrador -> Sistema: Aprobar/Rechazar publicación
+  else Notificación es de reporte
+    Administrador -> Sistema: Aprobar/Rechazar reporte
+    Sistema -> Base_de_Datos: Actualizar estado del publicador si es necesario
+  end
+  Sistema -> Base_de_Datos: Actualizar estado de la publicacion
+  Sistema -> Base_de_Datos: Actualizar estado de la notificación
+  Base_de_Datos --> Sistema: Notificación actualizada
+end
+deactivate Sistema
+@enduml

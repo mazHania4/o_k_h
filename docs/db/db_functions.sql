@@ -92,7 +92,7 @@ AFTER INSERT ON posts
 FOR EACH ROW
 BEGIN
     IF NEW.state = 'pending' THEN
-        INSERT INTO notifications (user_id, post_id, title, type_id, description) VALUES 
+        INSERT INTO notifications (user_id, post_id, title, type_id, description) 
         SELECT user_id, NEW.post_id, 'Revisar publicacion', 1, 'Un nuevo post requiere aprobación'
         FROM users WHERE type = 'admin';
     END IF;

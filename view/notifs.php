@@ -7,7 +7,7 @@
 
 ?>
 
-<div class="container" style="margin-right:200px;">
+<div class="container" style="margin-right:300px;">
     
     <?php foreach ($notifs as $notif): ?>
         <div class="m-3 p-2 rounded shadow-lg bg-body-tertiary">

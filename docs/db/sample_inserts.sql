@@ -25,7 +25,15 @@ INSERT INTO users (name, username, email, password, state, type) VALUES
 ('Paige Jankovsky',     'pjankovskyn',      'pjankovskyn@skyrock.com',      'cea70552116071b4ea769c41150f7f76c0e7673bfd6dc62453d507e41af9b529', 'active',   'user'); -- pass: tomate
 
 
-INSERT INTO publishers (user_id, state) VALUES (3, 'active'), (4, 'active'), (5, 'active'), (8, 'active'), (12, 'active'), (13, 'active'), (17, 'active');
+INSERT INTO publishers (user_id, state) VALUES (3, 'active'), (4, 'active'), (5, 'active'), (8, 'active'), (12, 'active'), (13, 'on_test'), (17, 'active');
+
+
+
+INSERT INTO notif_types (name, description) VALUES
+('Validar_post_admin', 'Se le notifica a un administrador que se ha realizado una publicación y necesita ser aprobada'),
+('Reporte_admin', 'Se le notifica a un administrador que una publicación ha sido reportada'),
+('Reporte_publicador', 'Se le notifica a un publicador que una de sus publicaciones ha sido reportada'),
+('Asistencia', 'Se le notifica a un usuario que se ha registrado su asistencia sobre una publicacion');
 
 
 INSERT INTO posts (publisher_id, title, start_date, start_time, end_date, end_time, capacity, location, description, url) VALUES
@@ -113,14 +121,6 @@ INSERT INTO post_cat(post_id, category_id) VALUES
 (10, 4), (10, 6), (10, 9), (11, 8), (11, 9), (12, 13), (12, 14), (13, 1), (13, 2), (14, 8), (14, 9), (15, 4), (15, 7),
 (16, 14), (17, 11), (17, 15), (18, 4), (19, 7), (19,14), (20, 3), (21, 15), (21, 12), (22, 5), (22, 9), (23, 1), (23,12),
 (24, 4), (25, 1), (25, 2), (26, 4), (27, 9), (27, 15), (28, 4), (29,12);
-
-
-INSERT INTO notif_types (name, description) VALUES
-('Validar_post_admin', 'Se le notifica a un administrador que se ha realizado una publicación y necesita ser aprobada'),
-('Reporte_admin', 'Se le notifica a un administrador que una publicación ha sido reportada'),
-('Reporte_publicador', 'Se le notifica a un publicador que una de sus publicaciones ha sido reportada'),
-('Asistencia', 'Se le notifica a un usuario que se ha registrado su asistencia sobre una publicacion');
-
 
 
 INSERT INTO report_types (name, description) VALUES

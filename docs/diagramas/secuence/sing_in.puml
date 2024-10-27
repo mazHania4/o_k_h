@@ -1,0 +1,19 @@
+@startuml sing_in
+participant Usuario
+participant Sistema
+
+Usuario -> Sistema: Solicitar registro
+activate Sistema
+Sistema -> Usuario: Ingresar datos (usuario, contraseña, email)
+Usuario -> Sistema: Ingresar datos
+Sistema -> Base_de_datos: Verificar disponibilidad de usuario
+Base_de_datos --> Sistema: Usuario disponible/no disponible
+alt Usuario disponible
+  Sistema -> Base_de_datos: Crear nuevo usuario
+  Base_de_datos--> Sistema: Usuario creado
+  Sistema -> Usuario: Registro exitoso
+else Usuario no disponible
+  Sistema -> Usuario: Usuario ya existe
+end
+deactivate Sistema
+@enduml

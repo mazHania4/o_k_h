@@ -1,0 +1,20 @@
+@startuml attend
+
+    |Usuario|
+    :Inicia sesión;
+    :Selecciona un evento;
+    :Solicita registrar asistencia;
+
+    |Controlador de Asistencias|
+    :Valida solicitud;
+    if (Usuario ya registrado) then (Sí)
+        :Envía mensaje de error;
+    else (No)
+        |Servicios|
+        :Registra asistencia en la base de datos;
+        :Incrementa contador de asistencias en el evento;
+        |Notificaciones|
+        :Envía notificación de confirmación;
+    endif
+    
+@enduml

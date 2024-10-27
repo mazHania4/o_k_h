@@ -1,0 +1,24 @@
+@startuml approve_post
+|Administrador|
+:Inicia sesión;
+:Revisa lista de publicaciones pendientes;
+:Selecciona una publicación para revisar;
+
+|Controlador de Publicaciones|
+:Consulta detalles de la publicación;
+
+|Servicios|
+if (Aprobación) then (Sí)
+    :Cambia estado de la publicación a 'active';
+    :Incrementa contador de publicaciones aprobadas del publicador;
+    if (Publicador on_test y publicaciones >= 2) then (Sí)
+        :Cambia estado del publicador a 'active';
+    endif
+else (No)
+    :Cambia estado de la publicación a 'banned';
+    :Reinicia contador de aprobaciones del publicador;
+endif
+
+|Notificaciones|
+:Envía notificación de estado actualizado al publicador;
+@enduml

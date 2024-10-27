@@ -1,0 +1,56 @@
+@startuml components
+
+node Ola_Ke_Hace {
+
+    node Interfaz_de_usuario {
+        component "Vista de Eventos" as eventView
+        component "Formulario de Registro" as registerForm
+        component "Sistema de Reportes" as reportSystem
+        component "Visualización de Notificaciones" as notificationsUI
+    }
+    note top of Interfaz_de_usuario: Permite a los usuario interactuar con la aplicación
+    
+    node Controladores {
+        component "Controlador de Asistencias" as attendanceCtrl
+        component "Controlador de Reportes" as reportCtrl
+        component "Controlador de Publicaciones" as postCtrl
+        component "Controlador de Notificaciones" as notifCtrl
+    }
+    note left of Controladores : Maneja las solicitudes HTTP, procesando las entradas del usuario.
+
+    node Servicios
+    note left  : Contiene la lógica de negocio principal para la aplicación.
+    node Servicios {
+        component "Gestión de Asistencias" as attendanceSvc
+        component "Gestión de Reportes" as reportSvc
+        component "Gestión de Publicaciones" as postSvc
+        component "Notificaciones" as notifSvc
+    }
+
+    [Base_de_datos]
+    note bottom of Base_de_datos: Almacena todos los datos relacionados con los usuarios, publicaciones, reportes y notificaciones.
+    
+    Interfaz_de_usuario -down[#0000FF]-> Controladores : Solicitudes HTTP (GET, POST)
+    Controladores -down[#0000FF]-> Servicios : Peticiones de lógica de negocio
+    Servicios -[#0000FF]-> [Base_de_datos] : Consultas SQL
+    
+
+    eventView --> attendanceCtrl : Solicitud de Registro
+    registerForm --> postCtrl : Crear Publicación
+    reportSystem --> reportCtrl : Registrar Reporte
+    notificationsUI --> notifCtrl : Ver Notificaciones
+
+    attendanceCtrl --> attendanceSvc : Procesar Asistencia
+    reportCtrl --> reportSvc : Registrar Reporte
+    postCtrl --> postSvc : Crear/Editar Publicación
+    notifCtrl --> notifSvc : Gestionar Notificaciones
+
+    attendanceSvc --> [Base_de_datos] : Registrar Asistencia
+    reportSvc --> [Base_de_datos] : Almacenar Reporte
+    postSvc --> [Base_de_datos] : Administrar Publicación
+    notifSvc --> [Base_de_datos] : Almacenar Notificación
+
+
+}
+
+@enduml

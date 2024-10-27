@@ -1,0 +1,29 @@
+@startuml become_publisher
+participant Usuario
+participant Sistema
+participant Administrador
+
+Usuario -> Sistema: Registrarse
+Sistema --> Usuario: Cuenta creada
+
+Usuario -> Sistema: Solicitar ser publicador
+Sistema -> Usuario: Leer y aceptar términos
+
+loop Primeras 2 publicaciones
+  Usuario -> Sistema: Publicar evento
+  Sistema -> Administrador: Revisar publicación
+  Administrador -> Sistema: Aprobar/Rechazar
+  Sistema --> Usuario: Publicación aprobada/rechazada
+end
+
+loop Publicaciones posteriores
+  Usuario -> Sistema: Publicar evento
+  Sistema --> Sistema: Publicar automáticamente
+end
+
+alt Usuario viola términos
+  Sistema -> Administrador: Notificar violación
+  Administrador -> Sistema: Suspender publicaciones automáticas o bloquear
+end
+
+@enduml

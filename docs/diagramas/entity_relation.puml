@@ -73,7 +73,7 @@ entity "Attendances" as attendances {
 }
 
 entity "ReportType" as report_types {
-    [PK] report_types_id : INTEGER NOT NULL
+    [PK] report_type_id : INTEGER NOT NULL
     --
     name : VARCHAR
     description : VARCHAR
@@ -99,9 +99,10 @@ entity "Notifications" as notifs {
     [PK] notification_id : INTEGER NOT NULL
     [FK] user_id : INTEGER NOT NULL
     [FK] post_id : INTEGER NOT NULL
+    [FK] type_id : INTEGER NOT NULL
     --
     title : VARCHAR
-    type : notifType
+    description : VARCHAR
     date : DATETIME
     state: ENUM
     description : VARCHAR
